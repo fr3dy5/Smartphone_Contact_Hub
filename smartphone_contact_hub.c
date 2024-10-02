@@ -33,9 +33,9 @@ char phone[MAX_PHONE_NUMBER_LENGTH];
 char email[MAX_EMAIL_ADDRESS_LENGTH];
 } Contact;
 
-void grab_name(char *name[], int *contact_count);
+/*void grab_name(char *name[], int *contact_count);
 void grab_phone(char *phone[], int *contact_count);
-void grab_email(char *email[], int *contact_count);
+void grab_email(char *email[], int *contact_count);*/
 
 /*
 incorperate csv file on exe c file
