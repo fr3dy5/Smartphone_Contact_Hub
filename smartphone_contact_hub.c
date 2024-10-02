@@ -17,17 +17,25 @@
 */
 
 #include <stdio.h>
+#include <string.h>
 
 #define MAX_CONTACTS 100
 #define MAX_CONTACT_NAME_LENGTH 50
 #define MAX_PHONE_NUMBER_LENGTH 15
 #define MAX_EMAIL_ADDRESS_LENGTH 50
 
-struct Contact {
-    char name[MAX_CONTACT_NAME_LENGTH];
-    char phone[MAX_PHONE_NUMBER_LENGTH];
-    char email[MAX_EMAIL_ADDRESS_LENGTH];
-};
+//int contact_count = 0;
+
+typedef struct
+{
+char name[MAX_CONTACT_NAME_LENGTH];
+char phone[MAX_PHONE_NUMBER_LENGTH];
+char email[MAX_EMAIL_ADDRESS_LENGTH];
+} Contact;
+
+void grab_name(char *name[], int *contact_count);
+void grab_phone(char *phone[], int *contact_count);
+void grab_email(char *email[], int *contact_count);
 
 /*
 incorperate csv file on exe c file
@@ -46,6 +54,68 @@ int main(void) {
     return 1;
     }
 
+    Contact contacts[MAX_CONTACTS];
+    int count = 0;
+    //declare space allocation by multiple of 8
+    char line[256];
+
+    fgets(line, sizeof(line), file);
+
+    while (fgets(line, sizeof(line), file) && count < MAX_CONTACTS) {
+        char *token = strtok(line, ",");
+    //if token is valid, copy contents into tokens of current line, minus a space for the null byte
+    if (token != NULL) {
+        strncpy(contacts[count].name, token, sizeof(contacts[count].name) - 1);
+        token = strtok(NULL, ",");
+        if (token != NULL) {
+            strncpy(contacts[count].phone, token, sizeof(contacts[count].phone) - 1);
+            token = strtok(NULL, ",");
+            if (token != NULL) {
+                strncpy(contacts[count].email, token, sizeof(contacts[count].email) - 1);
+                count++;
+                }
+            }
+        }
+    }
+    
+
+
+
+    //char contacts[3][2];
+
+    //int row = 0;
+   /*char line[5];
+    while (fgets(line, sizeof(line), file)) {
+        char *token;
+        int column = 0;
+        token = strtok(line, ",");
+        while (token != NULL) {
+            // 
+            printf("%s", token);
+            token = strtok(NULL, ",");
+            column++;
+        }
+    }*/
+    /*struct Contact contacts[MAX_CONTACTS];
+    char name[] = {};
+    char phone[] = {};
+    char email[] = {};
+    //int contact_count = 0;
+
+    for (int i = 0;  i < count; i++){
+        strcpy(contacts[i].name, contacts[i].phone, contacts[i].email);
+    };
+    
+    grab_name(contacts->name, contact_count){
+        
+    };
+    grab_phone(contacts->phone, contact_count){
+        
+    };
+    grab_email(contacts->email, contact_count){
+        
+    };*/
+    
     do {
         printf("Smartphone Contact Hub\n1. List Contacts\n2. Select Contact\n3. Exit\n");
         printf("Enter your choice: ");
@@ -54,7 +124,9 @@ int main(void) {
         switch (userInput)
         {
         case 1:{
-            /* code */
+            for (int i = 0;  i < count; i++){
+            printf("Phone Contacts:\n1.\tName: %s\n\t\tPhone: %s\n\t\tEmail: %s\n", contacts[i].name, contacts[i].phone, contacts[i].email);
+            }
             break;
             }
 
