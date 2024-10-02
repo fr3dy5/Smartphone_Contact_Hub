@@ -1,21 +1,3 @@
-/*
-1.Create a program that allows users to manage their contacts on a smartphone.
-2.Read contact information from a CSV file named "phone_contacts.csv".
-3.Store the contact information in arrays for efficient access and manipulation.
-4.Implement a main menu that provides options to list contacts, select a contact, and exit the application.
-5.When the user chooses to list contacts, display a numbered list of all contacts with their name, phone number, and email address.
-6.When the user chooses to select a contact, prompt them to enter the contact index and display the selected contact's information.
-7.After displaying the selected contact, provide options to call or send an email to that contact.
-8.If the user chooses to call, display a message indicating that the call is being made to the selected contact.
-9.If the user chooses to send an email, display a message indicating that an email is being sent to the selected contact's email address.
-10.If the user enters an invalid contact index or an invalid choice, display an appropriate error message.
-11.Include appropriate error handling for file I/O operations, such as checking if the file was successfully opened.
-12.Use meaningful variable names, function names, and comments to enhance code readability and maintainability.
-13.Implement the program in a modular way by creating separate functions for displaying contacts, displaying the selected contact, and performing contact actions.
-14.Use appropriate data structures and data types to store and manipulate contact information efficiently.
-15.Ensure that the program handles user input validation and provides appropriate feedback to the user.
-*/
-
 #include <stdio.h>
 #include <string.h>
 
