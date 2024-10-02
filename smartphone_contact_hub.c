@@ -18,6 +18,8 @@ char email[MAX_EMAIL_ADDRESS_LENGTH];
 
 int main() {
     int userInput;
+    int contactindex;
+    int choice;
     //int userInput2;
 
     FILE *file = fopen("phone_contacts.csv", "r");
@@ -28,6 +30,7 @@ int main() {
 
     Contact contacts[MAX_CONTACTS];
     int count = 0;
+
     //declare space allocation by multiple of 8
     char line[256];
 
@@ -44,13 +47,16 @@ int main() {
             token = strtok(NULL, ",");
             if (token != NULL) {
                 strncpy(contacts[count].email, token, sizeof(contacts[count].email) - 1);
+                //removes newline character(causes segmentation fault if omitted)
                 contacts[count].email[strcspn(contacts[count].email, "\n")] = 0;
                 count++;
                 }
             }
         }
     }
-      
+    
+    
+
     do {
         printf("Smartphone Contact Hub\n1. List Contacts\n2. Select Contact\n3. Exit\n");
         printf("Enter your choice: ");
@@ -60,29 +66,29 @@ int main() {
         {
         case 1:{
             for (int i = 0;  i < count; i++){
-            printf("Phone Contacts:\n1.\tName: %s\n\tPhone: %s\n\tEmail: %s\n", contacts[i].name, contacts[i].phone, contacts[i].email);
+            printf("Phone Contacts:\n%d.\tName: %s\n\tPhone: %s\n\tEmail: %s\n",i, contacts[i].name, contacts[i].phone, contacts[i].email);
             }
             break;
             }
 
-        /*case 2:{
+        case 2:{
             printf("Enter the contact index: \n");
-            scanf("%d", userInput);
+            scanf("%d", &contactindex);
             printf("Selected Contact: Name: Phone: Email: ");
 
             printf("What would you like to do? \n1. Call\n2. Send Email\n");
             printf("Enter your choice: \n");
-            scanf("%d", userInput2);
-            if (userInput2 == 1){
-                printf("Calling %s...\n", contacts[].name);
+            scanf("%d", &choice);
+            if (choice == 1){
+                printf("Calling %s...\n", contacts[contactindex].name);
                 }
-            else if (userInput2 == 2){
-                printf("Sending email to %s...\n", contacts[].email);
+            else if (choice == 2){
+                printf("Sending email to %s...\n", contacts[contactindex].email);
             }
             else
             printf("Invalid choice. Please try again.\n");
             break;
-            }*/
+            }
 
         case 3:{
             printf("Exiting the Smartphone Contact Hub.\n");
