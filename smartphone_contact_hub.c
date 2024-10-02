@@ -26,6 +26,7 @@
 
 //int contact_count = 0;
 
+//allow use of Constact w/o struct type and referencing
 typedef struct
 {
 char name[MAX_CONTACT_NAME_LENGTH];
@@ -33,20 +34,9 @@ char phone[MAX_PHONE_NUMBER_LENGTH];
 char email[MAX_EMAIL_ADDRESS_LENGTH];
 } Contact;
 
-/*void grab_name(char *name[], int *contact_count);
-void grab_phone(char *phone[], int *contact_count);
-void grab_email(char *email[], int *contact_count);*/
-
-/*
-incorperate csv file on exe c file
-Output: with no existing phone_contacts.csv
-$ ./smartphone_contact_hub 
-Error opening phone contacts file.
-*/
-
-int main(void) {
+int main() {
     int userInput;
-    int userInput2;
+    //int userInput2;
 
     FILE *file = fopen("phone_contacts.csv", "r");
     if (file == NULL) {
@@ -72,71 +62,45 @@ int main(void) {
             token = strtok(NULL, ",");
             if (token != NULL) {
                 strncpy(contacts[count].email, token, sizeof(contacts[count].email) - 1);
+                contacts[count].email[strcspn(contacts[count].email, "\n")] = 0;
                 count++;
                 }
             }
         }
     }
-    
-
-
-
-    //char contacts[3][2];
-
-    //int row = 0;
-   /*char line[5];
-    while (fgets(line, sizeof(line), file)) {
-        char *token;
-        int column = 0;
-        token = strtok(line, ",");
-        while (token != NULL) {
-            // 
-            printf("%s", token);
-            token = strtok(NULL, ",");
-            column++;
-        }
-    }*/
-    /*struct Contact contacts[MAX_CONTACTS];
-    char name[] = {};
-    char phone[] = {};
-    char email[] = {};
-    //int contact_count = 0;
-
-    for (int i = 0;  i < count; i++){
-        strcpy(contacts[i].name, contacts[i].phone, contacts[i].email);
-    };
-    
-    grab_name(contacts->name, contact_count){
-        
-    };
-    grab_phone(contacts->phone, contact_count){
-        
-    };
-    grab_email(contacts->email, contact_count){
-        
-    };*/
-    
+      
     do {
         printf("Smartphone Contact Hub\n1. List Contacts\n2. Select Contact\n3. Exit\n");
         printf("Enter your choice: ");
-        scanf("%s", userInput);
+        scanf("%d", &userInput);
 
         switch (userInput)
         {
         case 1:{
             for (int i = 0;  i < count; i++){
-            printf("Phone Contacts:\n1.\tName: %s\n\t\tPhone: %s\n\t\tEmail: %s\n", contacts[i].name, contacts[i].phone, contacts[i].email);
+            printf("Phone Contacts:\n1.\tName: %s\n\tPhone: %s\n\tEmail: %s\n", contacts[i].name, contacts[i].phone, contacts[i].email);
             }
             break;
             }
 
-        case 2:{
+        /*case 2:{
             printf("Enter the contact index: \n");
-            scanf("%s", userInput);
-            printf("Enter the contact index: \n");
-            scanf("%s", userInput2);
-            break;
+            scanf("%d", userInput);
+            printf("Selected Contact: Name: Phone: Email: ");
+
+            printf("What would you like to do? \n1. Call\n2. Send Email\n");
+            printf("Enter your choice: \n");
+            scanf("%d", userInput2);
+            if (userInput2 == 1){
+                printf("Calling %s...\n", contacts[].name);
+                }
+            else if (userInput2 == 2){
+                printf("Sending email to %s...\n", contacts[].email);
             }
+            else
+            printf("Invalid choice. Please try again.\n");
+            break;
+            }*/
 
         case 3:{
             printf("Exiting the Smartphone Contact Hub.\n");
@@ -151,43 +115,6 @@ int main(void) {
     }
     while (userInput != 3);
 
-//list and select contacts
-/*
-xxxx1. List Contacts
-xxxx2. Select Contact
-xxxx3. Exit
-xxxxEnter your choice: 2
-Enter the contact index: 4
-Selected Contact:
-Name: Sarah Taylor
-Phone: 713-555-4321
-Email: sarah@example.com
-What would you like to do?
-1. Call
-2. Send Email
-Enter your choice: 1
-Calling Sarah Taylor...
-xxxxxExiting the Smartphone Contact Hub.
-*/
-
-//call or email selected contact
-/*
-Smartphone Contact Hub
-1. List Contacts
-2. Select Contact
-3. Exit
-Enter your choice: 2
-Enter the contact index: 1
-Selected Contact:
-Name: Michael Brown
-Phone: 619-555-0123
-Email: michael@example.com
-What would you like to do?
-1. Call
-2. Send Email
-Enter your choice: 2
-Sending email to michael@example.com...
-*/
     fclose(file);
     file = NULL;
     return 1;
